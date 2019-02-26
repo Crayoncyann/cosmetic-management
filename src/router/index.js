@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Page404 from '@/views/404'
 import Login from '@/views/login'
+import Home from '@/views/home'
 
 Vue.use(Router)
 
@@ -16,39 +17,15 @@ export default new Router({
     {
       path: '/',
       name: '登录',
-      component: Login,
+      component: Login
+    },
+    {
+      path: '/home',
+      name: '主页',
+      component: Home,
       children: [
 
       ]
     }
   ]
 })
-
-// const page404 = r => require.ensure([], () => r(require('@/views/404')), '404')
-// const Home = r => require.ensure([], () => r(require('@/views/home')), 'home')
-// const Login = r => require.ensure([], () => r(require('@/views/login')), 'login')
-
-// export default [
-//   {
-//     path: '*',
-//     component: page404
-//   },
-//   {
-//     path: '/',
-//     component: App,
-//     children: [
-//       {
-//         path: '/login',
-//         component: Login,
-//         name: '登录',
-//         hidden: true
-//       }
-//       {
-//         path: '/home',
-//         component: Home,
-//         name: '主页',
-//         hidden: true
-//       }
-//     ]
-//   }
-// ]

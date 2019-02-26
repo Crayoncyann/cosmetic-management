@@ -7,7 +7,6 @@
       <a-layout-content>
         <div class="login">
           <img class="author" src="../image/login/author.jpg" alt="author">
-          <!-- <a-avatar src="../image/login/author.jpg" /> -->
           <div class="components-input-demo-presuffix">
             <a-input
               placeholder="user"
@@ -98,12 +97,26 @@ export default {
           this.loginState = !this.loginState;
           setTimeout(() => {
             this.loginState = !this.loginState;
+            var info = {
+              user: this.userName,
+              password: this.password,
+            }
+            localStorage.setItem('user_info', JSON.stringify(info))
             this.$message.success("登录成功演示结束");
-          }, 2500);
+            this.$router.push('/home')
+          }, 1000);
         } else {
           this.$message.error("请输入密码");
         }
       }
+    }
+  },
+  mounted() {
+    var info = localStorage.getItem('user_info')
+    if (info) {
+      info = JSON.parse(info)
+      this.userName = info.user
+      this.password = info.password
     }
   }
 };
