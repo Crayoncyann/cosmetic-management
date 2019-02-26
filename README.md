@@ -23,6 +23,6 @@ npm run build --report
 ----
 ## login
 
-![](https://github.com/Crayoncyann/cosmetic-management/src/image/screenshots/login.gif)
+![](https://github.com/Crayoncyann/cosmetic-management/blob/master/src/image/screenshots/login.gif)
 
 ----
