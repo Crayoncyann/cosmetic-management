@@ -1,5 +1,5 @@
 <template>
-  <div id="components-layout-demo-basic">
+  <div id="components-layout-demo-basic" class="login-layout">
     <a-layout>
       <a-layout-header>
         <img class="title" src="../image/login/logo.png" alt="">
@@ -81,7 +81,7 @@ export default {
       }
     },
     login() {
-      log(`用户名：${this.userName}`, `密码：${this.password}`);
+      // log(`用户名：${this.userName}`, `密码：${this.password}`);
       // 示例，123，123，如果相等返回 true
       var user = {
         user: "123",
@@ -103,7 +103,7 @@ export default {
             }
             localStorage.setItem('user_info', JSON.stringify(info))
             this.$message.success("登录成功演示结束");
-            this.$router.push('/home')
+            this.$router.push({name: '统计'})
           }, 1000);
         } else {
           this.$message.error("请输入密码");
@@ -122,13 +122,13 @@ export default {
 };
 </script>
 <style>
-.title {
+.login-layout .title {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.author {
+.login-layout .author {
   border: 2px solid white;
   width: 120px;
   height: 120px;
@@ -136,29 +136,29 @@ export default {
   border-radius: 10px;
   transition: all 0.5s;
 }
-.author:hover {
+.login-layout .author:hover {
   transform: translateY(-5px);
 }
-.icon-eye {
+.login-layout .icon-eye {
   position: relative;
   margin-left: 10px;
 }
-.margin {
+.login-layout .margin {
   margin: 20px 0;
 }
-.components-input-demo-presuffix .anticon-close-circle {
+.login-layout .components-input-demo-presuffix .anticon-close-circle {
   cursor: pointer;
   color: #ccc;
   transition: color 0.3s;
   font-size: 12px;
 }
-.components-input-demo-presuffix .anticon-close-circle:hover {
+.login-layout .components-input-demo-presuffix .anticon-close-circle:hover {
   color: #999;
 }
-.components-input-demo-presuffix .anticon-close-circle:active {
+.login-layout .components-input-demo-presuffix .anticon-close-circle:active {
   color: #666;
 }
-.login {
+.login-layout .login {
   color: black;
   border: 2px solid #a1cfe4;
   padding: 50px;
@@ -171,10 +171,10 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#components-layout-demo-basic {
+.login-layout #components-layout-demo-basic {
   text-align: center;
 }
-#components-layout-demo-basic .ant-layout-header {
+.login-layout #components-layout-demo-basic .ant-layout-header {
   height: 20%;
   position: relative;
 }
