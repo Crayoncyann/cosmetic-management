@@ -2,9 +2,8 @@
   <a-layout id="components-layout-demo-side" style="min-height: 100vh" class="home">
     <a-layout-sider collapsible v-model="collapsed">
       <div class="author">
-        <img class="author-img" src="../image/login/author.jpg" alt>
-        <a-button type="primary" @click="logout">logout</a-button>
-        <a-spin v-if="logoutState"/>
+        <img class="author-img" :class="{ 'img-op': logoutState }" src="../image/login/author.jpg" alt="logout" title="logout" @click="logout">
+        <a-spin v-if="logoutState" id="load" size="large"/>
       </div>
       <a-menu theme="dark" :defaultSelectedKeys="['1']" mode="inline">
         <a-sub-menu key="sub1">
@@ -67,17 +66,29 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
+.home .author #load{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .home .author {
   position: relative;
-  height: 35px;
+  height: 40px;
   margin: 20px;
 }
 .home .author .author-img {
   width: 40px;
   height: 40px;
-  margin-right: 10px;
   border-radius: 5px;
+  transition: 0.6s;
+}
+.home .author .author-img:hover {
+  transform: translateY(-3px);
+}
+.home .author .img-op {
+  opacity: 0.5;
 }
 #components-layout-demo-side .logo {
   height: 32px;

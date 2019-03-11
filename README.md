@@ -20,9 +20,16 @@ npm run build --report
 
 使用时请务必删除演示图
 
+3.11 该项目可能不会继续完善了，目前计划把功能补全，不再考虑性能和样式的问题
+
 ----
 ## login
 
 ![](https://github.com/Crayoncyann/cosmetic-management/blob/master/src/image/screenshots/login.gif)
+
+----
+## count
+
+![](https://github.com/Crayoncyann/cosmetic-management/blob/master/src/image/screenshots/count.gif)
 
 ----

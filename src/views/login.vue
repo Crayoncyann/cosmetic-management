@@ -2,10 +2,10 @@
   <div id="components-layout-demo-basic" class="login-layout">
     <a-layout>
       <a-layout-header>
-        <img class="title" src="../image/login/logo.png" alt="">
+        <img class="title" src="../image/login/logo.png" alt>
       </a-layout-header>
       <a-layout-content>
-        <div class="login">
+        <div class="login" :class="{ 'login-op': loginState }">
           <img class="author" src="../image/login/author.jpg" alt="author">
           <div class="components-input-demo-presuffix">
             <a-input
@@ -42,7 +42,7 @@
             </a-input>
           </div>
           <a-button type="primary" size="large" @click="login">Login</a-button>
-          <a-spin v-if="loginState" size="large"/>
+          <a-spin v-if="loginState" id="load" size="large"/>
         </div>
       </a-layout-content>
       <a-layout-footer>相应的注册信息</a-layout-footer>
@@ -92,19 +92,18 @@ export default {
       } else {
         if (this.password.length > 0 && this.password != "123") {
           this.$message.error("密码错误");
-        } else if (this.password == "123") {
-          this.$message.success("登录成功");
+        } else if (this.password == "123") {          
           this.loginState = !this.loginState;
           setTimeout(() => {
             this.loginState = !this.loginState;
             var info = {
               user: this.userName,
-              password: this.password,
-            }
-            localStorage.setItem('user_info', JSON.stringify(info))
-            this.$message.success("登录成功演示结束");
-            this.$router.push({name: '统计'})
-          }, 1000);
+              password: this.password
+            };
+            localStorage.setItem("user_info", JSON.stringify(info));
+            this.$router.push({ name: "统计" });
+            this.$message.success("登录成功");
+          }, 1500);
         } else {
           this.$message.error("请输入密码");
         }
@@ -112,16 +111,43 @@ export default {
     }
   },
   mounted() {
-    var info = localStorage.getItem('user_info')
+    var info = localStorage.getItem("user_info");
     if (info) {
-      info = JSON.parse(info)
-      this.userName = info.user
-      this.password = info.password
+      info = JSON.parse(info);
+      this.userName = info.user;
+      this.password = info.password;
     }
   }
 };
 </script>
 <style>
+.login-layout #load {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login-layout .login {
+  position: relative;
+}
+.login-layout .login-op {
+  opacity: 0.6;
+}
+.login-layout .login {
+  color: black;
+  border: 2px solid #a1cfe4;
+  padding: 50px;
+  background: linear-gradient(to left bottom, #a1cfe4, #dfc388);
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px #a1cfe4;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s;
+}
+
 .login-layout .title {
   position: absolute;
   top: 50%;
@@ -158,19 +184,6 @@ export default {
 .login-layout .components-input-demo-presuffix .anticon-close-circle:active {
   color: #666;
 }
-.login-layout .login {
-  color: black;
-  border: 2px solid #a1cfe4;
-  padding: 50px;
-  background: linear-gradient(to left bottom, #a1cfe4, #dfc388);
-  border-radius: 10px;
-  box-shadow: 3px 3px 10px #a1cfe4;
-  width: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 .login-layout #components-layout-demo-basic {
   text-align: center;
 }
@@ -182,6 +195,10 @@ export default {
 #components-layout-demo-basic .ant-layout-footer {
   background: #7dbcea;
   color: #fff;
+  position: relative;
+}
+#components-layout-demo-basic .ant-layout-header {
+  min-height: 140px;
 }
 #components-layout-demo-basic .ant-layout-footer {
   line-height: 1.5;

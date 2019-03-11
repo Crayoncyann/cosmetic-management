@@ -1,21 +1,24 @@
 <template>
   <div id="count">
-    <div>
-      <div class="info">
-        <span>DAY</span>
-        <p class="info-count">{{ info.day }}</p>
+    <a-spin id="load" size="large" v-show="!loadStatus" tip="Loading..."/>
+    <div v-show="loadStatus">
+      <div>
+        <div class="info">
+          <span>DAY</span>
+          <p class="info-count">{{ info.day }}</p>
+        </div>
+        <div class="info">
+          <span>MONTH</span>
+          <p class="info-count">{{ info.month }}</p>
+        </div>
+        <div class="info">
+          <span>SEASON</span>
+          <p class="info-count">{{ info.season }}</p>
+        </div>
       </div>
-      <div class="info">
-        <span>MONTH</span>
-        <p class="info-count">{{ info.month }}</p>
-      </div>
-      <div class="info">
-        <span>SEASON</span>
-        <p class="info-count">{{ info.season }}</p>
-      </div>
+      <p class="margin">YEAR (示例：随机生成数据)</p>
+      <div id="myChart"></div>
     </div>
-    <p class="margin">YEAR (示例：随机生成数据)</p>
-    <div id="myChart"></div>
   </div>
 </template>
 <script>
@@ -28,7 +31,8 @@ export default {
         season: "3000",
         year: [],
         counts: [],
-      }
+      },
+      loadStatus: false,
     };
   },
   methods: {
@@ -49,7 +53,7 @@ export default {
           left: "0",
           right: "0",
           bottom: "0",
-          containLabel: true,
+          containLabel: true
         },
         xAxis: [
           {
@@ -75,8 +79,16 @@ export default {
           }
         ]
       });
-      myChart.resize()
-    }
+      myChart.resize();
+    },
+    async onload() {
+      // ajax获取数据，暂时用延迟代替
+      setTimeout(() => {
+        // 画Echarts
+        this.drawLine();
+        this.loadStatus = !this.loadStatus;
+      }, 1500);
+    },
   },
   mounted() {
     /**
@@ -87,12 +99,13 @@ export default {
       this.info.year.push(`${index}月`);
     }
     for (let index = 0; index < 12; index++) {
-      var value = Math.random().toString().slice(2, 4)
-      value = parseInt(value) * 5
-      this.info.counts.push(value)
+      var value = Math.random()
+        .toString()
+        .slice(2, 4);
+      value = parseInt(value) * 5;
+      this.info.counts.push(value);
     }
-    // 画Echarts
-    this.drawLine();
+    this.onload();
   }
 };
 </script>
@@ -120,6 +133,15 @@ export default {
   width: 1000px;
   height: 500px;
   margin: 0 auto;
+}
+#count {
+  position: relative;
+  min-height: 250px;
+}
+#count #load {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
   
